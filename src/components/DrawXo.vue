@@ -2,7 +2,7 @@
     <div class="res">
         {{ res }}
     </div>
-    <div class="xoa">
+    <div class="xo">
         <div class="divider_left"></div>
         <div class="divider_right"></div>
         <div class="divider_top"></div>
