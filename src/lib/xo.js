@@ -44,7 +44,6 @@ class Node{
         this.result = null;
     }
     getResult(){
-        console.log(this.result)
         return this.result;
     }
     setResult(result){
@@ -157,7 +156,10 @@ class XOTreeSolver {
     }
 
     getInfo(){
-        return this.getCountsParties();
+        return {
+            about: this.getCountsParties(),
+            levels: this.getLevelsInfo()
+        }
     }
     getCountsParties(){
         const strRoot = JSON.stringify(this.root);
@@ -169,6 +171,26 @@ class XOTreeSolver {
             x: countX,
             o: countO,
             draw: countDraw
+        }
+    }
+    getLevelsInfo(){
+        const objInfoLevel = {};
+        this.fillLevelsRecursive(this.root, objInfoLevel);
+        return objInfoLevel;
+    }
+    fillLevelsRecursive(node, objInfo){
+        const level = node.field.flat().filter(Boolean).length;
+        const nodeResult = node.getResult();
+        if(!objInfo[level]) {
+            objInfo[level] = {};
+        }
+        if(nodeResult){
+            if(!objInfo[level][nodeResult]) objInfo[level][nodeResult] = 1;
+            else objInfo[level][nodeResult]++;
+        }
+        
+        for(const it of node.items){
+            this.fillLevelsRecursive(it, objInfo)
         }
     }
 }

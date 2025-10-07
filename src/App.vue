@@ -67,7 +67,8 @@ export default {
         getInfo() {
             this.isLoading = true;
             setTimeout(() => {
-                this.objInfoGame = this.tree.getInfo();
+                this.objInfoGame = this.tree.getInfo(),
+
                 this.isLoading = false;
             })
         },
